@@ -6,6 +6,7 @@
         <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
         <link href="https://api.mapbox.com/mapbox-gl-js/v2.8.0/mapbox-gl.css" rel="stylesheet">
         <script src="https://api.mapbox.com/mapbox-gl-js/v2.8.0/mapbox-gl.js"></script>
+        <link href='https://fonts.googleapis.com/css?family=Manrope' rel='stylesheet'>
         <script src="compare.js"></script>
         <link rel="stylesheet" href="style.css">
     </head>
@@ -16,18 +17,16 @@
             <div id="left" class="sidebar flex-center left collapsed">
                 <div class="sidebar-content rounded-rect">
                     <h1>The Silk Road (130 BCE-1453 CE)</h1>
-                    <p>Source: <a href='https://en.unesco.org/silkroad/about-silk-roads'>UNESCO About the Silk Roads</a></p>
-                    <h2>Please drag the arrow on the right to compare the time changes of important cities on the Silk Road.</h2>
-					
+                    <p>Source: <a href='https://en.unesco.org/silkroad/about-silk-roads'>UNESCO About the Silk Roads</a></p>	
                     <p>The Silk Road was an ancient trade route originating at Chang'an (Xian). The 6,400 km road followed the Great Wall of China to the northwest, bypassed the Takla Makan Desert, climbed the Pamirs, crossed the Middle East, and went on to the Levant; from there the merchandise was shipped across the Mediterranean Sea. Few people travelled the entire route, and goods were handled in a staggered progression by middlemen.</p>
                     <p>The vast trade networks of the Silk Roads carried more than just merchandise and precious commodities. The constant movement and mixing of populations brought about the widespread transmission of knowledge, ideas, cultures, and beliefs, which had a profound impact on the history and civilizations of the Eurasian peoples. Many of cities developed into hubs of culture and learning. Science, arts, and literature, as well as crafts and technologies, were thus shared and disseminated into societies along the lengths of these routes, and in this way, languages and cultures developed and influenced one another.</p>
                     <p>The Silk Road reached its golden age in the Tang dynasty (600 CE). With the gradual loss of Roman territory in Asia and the rise of Arabian power in the Levant, the Silk Road became increasingly unsafe and untraveled. In the 13th and 14th centuries, the route was revived under the Mongols, and at that time, the Venetian Marco Polo used it to travel to China. After the fall of the Mongol Empire, the great powers along the Silk Road became separated. The discovery of a sea route from Europe to Asia in the late 15th century dealt a damaging blow to the Silk Road trade again. Since then, the prosperous Silk Road has been on the decline.</p>
 				    <div class="flyto">	
 				    <p>
-                        <button id="east asia" >The full routes: show</button>
+                        <button id="east asia" >Show the full routes</button>
                     </p>
 					</div>
-					<div class="sidebar-toggle rounded-rect left" onclick="toggleSidebar('left')">
+                    <div class="sidebar-toggle rounded-rect left" onclick="toggleSidebar('left')">
                         &rarr;
                     </div>
 					<div class="flyto">
@@ -39,6 +38,7 @@
                         <button id="start">Starting point</button>
                     </p>
                     </div>
+                    <h2>Please drag the arrow on the right to compare the time changes of important cities on the Silk Road.</h2>
 					
 					
 					
@@ -302,15 +302,15 @@
                             // Show the full route
 								
 							document.getElementById('east asia').addEventListener('click', function() {
-								  if (document.getElementById("east asia").innerHTML == 'The full routes: show') {
-									document.getElementById("east asia").innerHTML = 'The full routes: hide';
+								  if (document.getElementById("east asia").innerHTML == 'Show the full routes') {
+									document.getElementById("east asia").innerHTML = 'Hide the full routes';
 									afterMap.setLayoutProperty('aroute','visibility','visible');
                                     beforeMap.setLayoutProperty('broute','visibility','visible');
 
 								  }
 
 								  else {
-									document.getElementById("east asia").innerHTML = 'The full routes: show';
+									document.getElementById("east asia").innerHTML = 'Show the full routes';
 									afterMap.setLayoutProperty('aroute','visibility','none');
                                     beforeMap.setLayoutProperty('broute','visibility','none');
 								  }   
