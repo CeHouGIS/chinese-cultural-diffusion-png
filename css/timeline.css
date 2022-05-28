@@ -147,7 +147,7 @@ html {
   float: right;
   margin-left: 62vw;
   font: "Manrope";
-  font-size: 16px;
+  font-size: 20px;
   line-height: 200%;
   color: rgba(255, 255, 255, 0.705);
 }
@@ -170,7 +170,7 @@ html {
   float: right;
   margin-left: 12vw;
   font: "Manrope";
-  font-size: 16px;
+  font-size: 20px;
   line-height: 200%;
   color: rgba(255, 255, 255, 0.705);
 }
@@ -195,7 +195,7 @@ html {
   float: right;
   margin-left: 62vw;
   font: "Manrope";
-  font-size: 16px;
+  font-size: 20px;
   line-height: 200%;
   color: rgba(255, 255, 255, 0.705);
 }
@@ -460,7 +460,7 @@ img {
   margin-top: 20vh;
   margin-bottom: 17vh;
   font: "Manrope";
-  font-size: 16px;
+  font-size: 20px;
   line-height: 240%;
   color: rgba(255, 255, 255, 0.705);
 }
@@ -472,7 +472,7 @@ img {
   /* width: 80vw; */
   /* bottom: 5vh; */
   font: "Manrope";
-  font-size: 16px;
+  font-size: 20px;
   line-height: 240%;
   color: rgba(255, 255, 255, 0.705);
   margin-bottom: 5vh;
@@ -493,7 +493,7 @@ img {
   text-align: center;
   top: -16vh;
   font: "Manrope";
-  font-size: 22px;
+  font-size: 20px;
   line-height: 240%;
   color: rgba(255, 255, 255, 0.705);
 }
@@ -510,7 +510,7 @@ img {
 #xian_desc p {
   /* margin: 10vh auto; */
   text-align: center;
-  font-size: 16px;
+  font-size: 26px;
   line-height: 240%;
   color: rgba(255, 255, 255, 0.705);
 }

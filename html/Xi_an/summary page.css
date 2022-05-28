@@ -9,8 +9,8 @@ body {
   position: absolute;
   top: 50px;
   z-index: 99;
-  padding: 12px 24px;
-  font-size: 20px;
+  padding: 8px 16px;
+  font-size: 16px;
 }
 
 .tl-bg {
