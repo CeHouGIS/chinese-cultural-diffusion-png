@@ -24,6 +24,11 @@ html {
   box-sizing: border-box;
 }
 
+#changan_anchor {
+  position: absolute;
+  left: 0px;
+}
+
 .cover {
   margin-top: 0;
   height: 100vh;
@@ -35,9 +40,11 @@ html {
 
 
 #about_us {
+  margin-top: -3px;
+  margin-bottom: -3px;
   padding-top: 10vh;
-  height: 200vh;
-  width: 100vw;
+  height: 201vh;
+  width: 101vw;
   background: url("../figure/lalacopy.jpg") no-repeat center center fixed; 
   border-style: none;
   overflow: hidden;
@@ -59,8 +66,10 @@ html {
   padding-left: 50px;
   padding-top: 1vh;
   overflow-y: scroll;
+  overflow-x: hidden;
   height: 80vh;
   font: 'Manrope';
+
 }
 
 .ref .sub_ref {
