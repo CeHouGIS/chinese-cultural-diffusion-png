@@ -141,6 +141,7 @@ a:visited {
   touch-action: unset;
 }
 
+/* the hover botton */
 .overlay1 {
   position: fixed;
   top: 10px;
@@ -153,13 +154,12 @@ a:visited {
   color: #fff;
   display: inline-block;
   margin: 0;
-  padding: 10px 20px;
+  padding: 5px 10px;
   border: none;
   cursor: pointer;
   border-radius: 3px;
 }
 
-/* the hover botton */
 .overlay1 button:hover {
   background-color: #ffffff;
   color: rgb(187, 181, 99);
@@ -168,7 +168,7 @@ a:visited {
 .overlay2 {
   position: fixed;
   top: 10px;
-  left: 130px;
+  left: 110px;
 }
 
 .overlay2 button {
@@ -177,7 +177,7 @@ a:visited {
   color: #fff;
   display: inline-block;
   margin: 0;
-  padding: 10px 20px;
+  padding: 5px 10px;
   border: none;
   cursor: pointer;
   border-radius: 3px;
@@ -191,7 +191,7 @@ a:visited {
 .overlay3 {
   position: fixed;
   top: 10px;
-  left: 315px;
+  left: 230px;
 }
 
 .overlay3 button {
@@ -200,7 +200,7 @@ a:visited {
   color: #fff;
   display: inline-block;
   margin: 0;
-  padding: 10px 20px;
+  padding: 5px 10px;
   border: none;
   cursor: pointer;
   border-radius: 3px;
@@ -214,7 +214,7 @@ a:visited {
 .overlay4 {
   position: fixed;
   top: 10px;
-  left: 450px;
+  left: 335px;
 }
 
 .overlay4 button {
@@ -223,7 +223,7 @@ a:visited {
   color: #fff;
   display: inline-block;
   margin: 0;
-  padding: 10px 20px;
+  padding: 5px 10px;
   border: none;
   cursor: pointer;
   border-radius: 3px;
@@ -237,7 +237,7 @@ a:visited {
 .overlay5 {
   position: fixed;
   top: 10px;
-  left: 615px;
+  left: 450px;
 }
 
 .overlay5 button {
@@ -246,7 +246,7 @@ a:visited {
   color: #fff;
   display: inline-block;
   margin: 0;
-  padding: 10px 20px;
+  padding: 5px 10px;
   border: none;
   cursor: pointer;
   border-radius: 3px;
@@ -259,11 +259,57 @@ a:visited {
 
 .overlay6 {
   position: fixed;
+  top: 10px;
+  left: 552px;
+}
+
+.overlay6 button {
+  font: 600 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
+  background-color: #d1d09e;
+  color: #fff;
+  display: inline-block;
+  margin: 0;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.overlay6 button:hover {
+  background-color: #ffffff;
+  color: rgb(187, 181, 99);
+}
+
+.overlay7 {
+  position: fixed;
+  top: 10px;
+  left: 655px;
+}
+
+.overlay7 button {
+  font: 600 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
+  background-color: #d1d09e;
+  color: #fff;
+  display: inline-block;
+  margin: 0;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.overlay7 button:hover {
+  background-color: #ffffff;
+  color: rgb(187, 181, 99);
+}
+
+.overlay0 {
+  position: fixed;
   bottom: 30px;
   right: 12px;
 }
 
-.overlay6 button {
+.overlay0 button {
   font: 630 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
   background-color: #d1d09e;
   color: #fff;
@@ -275,7 +321,30 @@ a:visited {
   border-radius: 3px;
 }
 
-.overlay6 button:hover {
+.overlay0 button:hover {
+  background-color: #ffffff;
+  color: rgb(187, 181, 99);
+}
+
+.overlay00 {
+  position: fixed;
+  top: 10px;
+  left: 800px;
+}
+
+.overlay00 button {
+  font: 630 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
+  background-color: #d1d09e;
+  color: #fff;
+  display: inline-block;
+  margin: 0;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.overlay00 button:hover {
   background-color: #ffffff;
   color: rgb(187, 181, 99);
 }
@@ -290,7 +359,7 @@ a:visited {
 
 /* The legend  */
 #full span {
-  border-radius: 50%;
+  border-radius: 70%;
   display: inline-block;
   height: 10px;
   margin-right: 5px;
@@ -298,15 +367,16 @@ a:visited {
 }
 
 #qqlfirst span {
-  border-radius: 60%;
+  border-radius: 70%;
   display: inline-block;
   height: 10px;
   margin-right: 5px;
   width: 10px;
 }
 
-#hhhsecond span {
-  border-radius: 60%;
+#hhhsecond span,
+#hhhthird span {
+  border-radius: 70%;
   display: inline-block;
   height: 10px;
   margin-right: 5px;
@@ -314,15 +384,16 @@ a:visited {
 }
 
 #hhhfourth span {
-  border-radius: 60%;
+  border-radius: 70%;
   display: inline-block;
   height: 10px;
   margin-right: 5px;
   width: 10px;
 }
 
-#hhhfifth span {
-  border-radius: 60%;
+#hhhfifth span,
+#hhhsixth span {
+  border-radius: 70%;
   display: inline-block;
   height: 10px;
   margin-right: 5px;

@@ -66,7 +66,9 @@ var config = {
             alignment: 'fully',
             hidden: false,
             title: "Timeline of Zheng He's seven voyages",
-            description: "The different colours in the diagram represent the new routes explored on the various voyages.",
+            description: "The colours by time correspond to the extended routes explored on different voyages.",
+            //The different colours by time correspond to the extended routes explored on the various voyages.
+            //The different colours in the diagram represent the new routes explored on the various voyages.
             image: 'https://raw.githubusercontent.com/sherlkk/DVG/main/timeline.jpg',
             location: {
 				center: { lon: 73.81560, lat: 16.94024 },

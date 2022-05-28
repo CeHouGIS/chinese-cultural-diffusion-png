@@ -546,21 +546,29 @@ map.on('load', () => {
         <button id="qqlfirst"><span style="background-color: #566f70"></span>First Voyage</button>
     </div>
     <div class="overlay2">
-        <button id="hhhsecond"><span style="background-color: #6d2fb4"></span>Second & Third Voyage</button>
+        <button id="hhhsecond"><span style="background-color: #6d2fb4"></span>Second Voyage</button>
     </div>
     <div class="overlay3">
-        <button id="hhhfourth"><span style="background-color: #ca6e22"></span>Fourth Voyage</button>
+        <button id="hhhthird"><span style="background-color: #6d2fb4"></span>Third Voyage</button>
     </div>
     <div class="overlay4">
-        <button id="hhhfifth"><span style="background-color: #549c57"></span>Fifth & Sixth Voyage</button>
+        <button id="hhhfourth"><span style="background-color: #ca6e22"></span>Fourth Voyage</button>
     </div>
     <div class="overlay5">
-        <button id="full"><span style="background-color: #e45eb1"></span>Seventh Voyage (Last)</button>
+        <button id="hhhfifth"><span style="background-color: #549c57"></span>Fifth Voyage</button>
     </div>
     <div class="overlay6">
+        <button id="hhhsixth"><span style="background-color: #549c57"></span>Sixth Voyage</button>
+    </div>
+    <div class="overlay7">
+        <button id="full"><span style="background-color: #e45eb1"></span>Seventh Voyage</button>
+    </div>
+    <div class="overlay0">
         <button id="interactive">Open the interaction</button>
     </div>
-
+    <div class="overlay00">
+        <button id="clear">Clear</button>
+    </div>
 
     <script>
 	mapboxgl.accessToken = 'pk.eyJ1Ijoic2hlcmxrZXIiLCJhIjoiY2p5bDVwMHJmMDR1djNscDd1eWF4eHpnMiJ9.Vbcq4CS53bHzqfWU_mAaHA';
@@ -572,7 +580,8 @@ map.on('load', () => {
             zoom: 2.5
         });
 		
-    const speed = 27
+    const speed = 33
+    const howbig = 0.33
     map.on('load', async () => {
     
             // The last route
@@ -637,7 +646,7 @@ map.on('load', () => {
                             'source': 'move', // reference the data source
                             'layout': {
                                 'icon-image': 'fune', // reference the image
-                                'icon-size': 0.3,
+                                'icon-size': howbig,
                                 'icon-allow-overlap': true,               
                                 'icon-ignore-placement': true
                             }
@@ -649,123 +658,61 @@ map.on('load', () => {
                                 map.getSource('move').setData(move);
                                 i++;
                                 } 
-                                else {
+                            else {
                                 window.clearInterval(timer);
+                                map.removeImage('fune')
                                 }
                             }, 20);
                     }          
             );
 
 
-            // setup the viewport
-            map.jumpTo({ 'center': coordinates[[0-15]], 'zoom': 2.2 });
+            // // setup the viewport
+            // map.jumpTo({ 'center': coordinates[[0-15]], 'zoom': 2.2 });
+            //The first one
+            document.getElementById('clear').addEventListener('click',() => {
+                map.removeImage('fune1')
+                map.removeImage('fune2')
+                map.removeImage('fune3')
+                map.removeImage('fune4')
+                map.removeImage('fune5')
+                map.removeImage('fune6')
+                map.removeImage('fune7')
 
-            // The last route 
-
-            document.getElementById('full').addEventListener('click',() => {
-                map.removeImage('fune')
-                map.removeLayer('move')
-                map.removeSource('move')
-                map.removeSource('trace')
-                
-
+                //map.removeLayer('move1','move2','move3','move4','move5','move6','move7')
+                //map.removeSource('move1','move2','move3','move4','move5','move6','move7')
+                //map.removeSource('trace1','trace2','trace3','trace4','trace5','trace6','trace7')
             })
 
-            document.getElementById('full').addEventListener('click', async () => {
-
-                const response = await fetch(         
-                'https://raw.githubusercontent.com/sherlkk/DVG/main/zhfull.geojson'             
-                );
-                        
-                const data = await response.json();            
-                // save full coordinate list for later                
-                const coordinates = data.features[0].geometry.coordinates[0];               
-                // start by showing just the first coordinate               
-                data.features[0].geometry.coordinates[0] = [coordinates[[0]]];    
-                
-                // add it to the map               
-                map.addSource('trace', { type: 'geojson', data: data }); 
-                map.loadImage(
-                    'https://raw.githubusercontent.com/sherlkk/DVG/main/sfunee.png',
-                    (error, image) => {
-                        if (error) throw error;
-
-                        // Add the image to the map style.
-                        map.addImage('fune', image);
-                        const move = {
-                            'type': 'FeatureCollection',
-                            'features': [
-                                {
-                                    'type': 'Feature',
-                                    'properties': {},
-                                    'geometry': {
-                                        'type': 'Point',
-                                        'coordinates': [ 118.800474076522789, 32.059281932576795 ]
-                                    }
-                                }
-                            ]
-                        };
-
-                        // Add a data source containing one point feature.
-                        map.addSource('move', { type: 'geojson', data: move }); 
-
-                        // Add a layer to use the image to represent the data.
-                        map.addLayer({
-                            'id': 'move',
-                            'type': 'symbol',
-                            'source': 'move', // reference the data source
-                            'layout': {
-                                'icon-image': 'fune', // reference the image
-                                'icon-size': 0.3,
-                                'icon-allow-overlap': true,               
-                                'icon-ignore-placement': true
-                            }
-                        });
-                        let i = 0;
-                        const timer = setInterval(() => {
-                            if (i < coordinates.length) {
-                                move.features[0].geometry.coordinates = coordinates[[i]];
-                                map.getSource('move').setData(move);
-                                i++;
-                                } 
-                                else {
-                                window.clearInterval(timer);
-                                }
-                            }, speed);
-                    }          
-                    );
-                });
-
-            //The first one
-
             document.getElementById('qqlfirst').addEventListener('click',() => {
-                map.removeLayer('move')
-                map.removeSource('move')
-                map.removeSource('trace')
+                map.removeImage('fune1')
+                map.removeLayer('move1')
+                map.removeSource('move1')
+                map.removeSource('trace1')
             })
 
             document.getElementById('qqlfirst').addEventListener('click', async () => {
 
-                const response = await fetch(         
+                const response1 = await fetch(         
                 'https://raw.githubusercontent.com/sherlkk/DVG/main/zhfirst.geojson'             
                 );
                         
-                const data = await response.json();            
+                const data1 = await response1.json();            
                 // save full coordinate list for later                
-                const coordinates = data.features[0].geometry.coordinates[0];               
+                const coordinates1 = data1.features[0].geometry.coordinates[0];               
                 // start by showing just the first coordinate               
-                data.features[0].geometry.coordinates[0] = [coordinates[[0]]];    
+                data1.features[0].geometry.coordinates[0] = [coordinates1[[0]]];    
                 
                 // add it to the map               
-                map.addSource('trace', { type: 'geojson', data: data }); 
+                map.addSource('trace1', { type: 'geojson', data: data1 }); 
                 map.loadImage(
-                    'https://raw.githubusercontent.com/sherlkk/DVG/main/sfunee.png',
-                    (error, image) => {
+                    'https://raw.githubusercontent.com/sherlkk/DVG/main/flag/11.png',
+                    (error, image1) => {
                         if (error) throw error;
 
                         // Add the image to the map style.
-                        map.addImage('fune', image);
-                        const move = {
+                        map.addImage('fune1', image1);
+                        const move1 = {
                             'type': 'FeatureCollection',
                             'features': [
                                 {
@@ -780,321 +727,485 @@ map.on('load', () => {
                         };
 
                         // Add a data source containing one point feature.
-                        map.addSource('move', { type: 'geojson', data: move }); 
+                        map.addSource('move1', { type: 'geojson', data: move1 }); 
 
                         // Add a layer to use the image to represent the data.
                         map.addLayer({
-                            'id': 'move',
+                            'id': 'move1',
                             'type': 'symbol',
-                            'source': 'move', // reference the data source
+                            'source': 'move1', // reference the data source
                             'layout': {
-                                'icon-image': 'fune', // reference the image
-                                'icon-size': 0.3,
+                                'icon-image': 'fune1', // reference the image
+                                'icon-size': howbig,
                                 'icon-allow-overlap': true,               
                                 'icon-ignore-placement': true
                             }
                         });
                         let i = 0;
-                        const timer = setInterval(() => {
-                            if (i < coordinates.length) {
-                                move.features[0].geometry.coordinates = coordinates[[i]];
-                                map.getSource('move').setData(move);
+                        const timer1 = setInterval(() => {
+                            if (i < coordinates1.length) {
+                                move1.features[0].geometry.coordinates = coordinates1[[i]];
+                                map.getSource('move1').setData(move1);
                                 i++;
                                 } 
                                 else {
-                                window.clearInterval(timer);
+                                window.clearInterval(timer1);
                                 }
                             }, speed);
                     }          
                     );
                 });
 
-                // The second and third one
+            
+                // The second one
 
                 document.getElementById('hhhsecond').addEventListener('click',() => {
-                map.removeLayer('move')
-                map.removeSource('trace')
+                    map.removeImage('fune2')
+                    map.removeLayer('move2')
+                    map.removeSource('move2')
+                    map.removeSource('trace2')
                 })
 
                 document.getElementById('hhhsecond').addEventListener('click', async () => {
-                map.removeLayer('move')
-                map.removeSource('move')
 
-                const response = await fetch(         
-                'https://raw.githubusercontent.com/sherlkk/DVG/main/zhst.geojson'             
-                );
-                        
-                const data = await response.json();                         
-                const coordinates = data.features[0].geometry.coordinates[0];                            
-                data.features[0].geometry.coordinates[0] = [coordinates[[0]]];    
-
-                // add it to the map               
-                map.addSource('trace', { type: 'geojson', data: data }); 
-                map.loadImage(
-                    'https://raw.githubusercontent.com/sherlkk/DVG/main/sfunee.png',
-                    (error, image) => {
-                        if (error) throw error;
-
-                        // Add the image to the map style.
-                        map.addImage('fune', image);
-                        const move = {
-                            'type': 'FeatureCollection',
-                            'features': [
-                                {
-                                    'type': 'Feature',
-                                    'properties': {},
-                                    'geometry': {
-                                        'type': 'Point',
-                                        'coordinates': [ 118.800474076522789, 32.059281932576795 ]
-                                    }
-                                }
-                            ]
-                        };
-
-                        // Add a data source containing one point feature.
-                        map.addSource('move', { type: 'geojson', data: move }); 
-
-                        // Add a layer to use the image to represent the data.
-                        map.addLayer({
-                            'id': 'move',
-                            'type': 'symbol',
-                            'source': 'move', // reference the data source
-                            'layout': {
-                                'icon-image': 'fune', // reference the image
-                                'icon-size': 0.3,
-                                'icon-allow-overlap': true,               
-                                'icon-ignore-placement': true
-                            }
-                        });
-                        let i = 0;
-                        const timer = setInterval(() => {
-                            if (i < coordinates.length) {
-                                move.features[0].geometry.coordinates = coordinates[[i]];
-                                map.getSource('move').setData(move);
-                                i++;
-                                } 
-                                else {
-                                window.clearInterval(timer);
-                                }
-                            }, speed);
-                    }          
+                    const response2 = await fetch(         
+                    'https://raw.githubusercontent.com/sherlkk/DVG/main/zhst.geojson'             
                     );
-                });
+                            
+                    const data2 = await response2.json();            
+                    // save full coordinate list for later                
+                    const coordinates2 = data2.features[0].geometry.coordinates[0];               
+                    // start by showing just the first coordinate               
+                    data2.features[0].geometry.coordinates[0] = [coordinates2[[0]]];    
+                    
+                    // add it to the map               
+                    map.addSource('trace2', { type: 'geojson', data: data2 }); 
+                    map.loadImage(
+                        'https://raw.githubusercontent.com/sherlkk/DVG/main/flag/22.png',
+                        (error, image2) => {
+                            if (error) throw error;
 
-                // The fourth one
+                            // Add the image to the map style.
+                            map.addImage('fune2', image2);
+                            const move2 = {
+                                'type': 'FeatureCollection',
+                                'features': [
+                                    {
+                                        'type': 'Feature',
+                                        'properties': {},
+                                        'geometry': {
+                                            'type': 'Point',
+                                            'coordinates': [ 118.800474076522789, 32.059281932576795 ]
+                                        }
+                                    }
+                                ]
+                            };
 
-                document.getElementById('hhhfourth').addEventListener('click',() => {
-                map.removeLayer('move')
-                map.removeSource('trace')
+                            // Add a data source containing one point feature.
+                            map.addSource('move2', { type: 'geojson', data: move2 }); 
+
+                            // Add a layer to use the image to represent the data.
+                            map.addLayer({
+                                'id': 'move2',
+                                'type': 'symbol',
+                                'source': 'move2', // reference the data source
+                                'layout': {
+                                    'icon-image': 'fune2', // reference the image
+                                    'icon-size': howbig,
+                                    'icon-allow-overlap': true,               
+                                    'icon-ignore-placement': true
+                                }
+                            });
+                            let i = 0;
+                            const timer2 = setInterval(() => {
+                                if (i < coordinates2.length) {
+                                    move2.features[0].geometry.coordinates = coordinates2[[i]];
+                                    map.getSource('move2').setData(move2);
+                                    i++;
+                                    } 
+                                    else {
+                                    window.clearInterval(timer2);
+                                    }
+                                }, speed);
+                        }          
+                        );
+                    });
+
+                // The third one
+
+                document.getElementById('hhhthird').addEventListener('click',() => {
+                    map.removeImage('fune3')
+                    map.removeLayer('move3')
+                    map.removeSource('move3')
+                    map.removeSource('trace3')
+                })
+
+                document.getElementById('hhhthird').addEventListener('click', async () => {
+
+                    const response3 = await fetch(         
+                    'https://raw.githubusercontent.com/sherlkk/DVG/main/zhst.geojson'             
+                    );
+                            
+                    const data3 = await response3.json();            
+                    // save full coordinate list for later                
+                    const coordinates3 = data3.features[0].geometry.coordinates[0];               
+                    // start by showing just the first coordinate               
+                    data3.features[0].geometry.coordinates[0] = [coordinates3[[0]]];    
+                    
+                    // add it to the map               
+                    map.addSource('trace3', { type: 'geojson', data: data3 }); 
+                    map.loadImage(
+                        'https://raw.githubusercontent.com/sherlkk/DVG/main/flag/33.png',
+                        (error, image3) => {
+                            if (error) throw error;
+
+                            // Add the image to the map style.
+                            map.addImage('fune3', image3);
+                            const move3 = {
+                                'type': 'FeatureCollection',
+                                'features': [
+                                    {
+                                        'type': 'Feature',
+                                        'properties': {},
+                                        'geometry': {
+                                            'type': 'Point',
+                                            'coordinates': [ 118.800474076522789, 32.059281932576795 ]
+                                        }
+                                    }
+                                ]
+                            };
+
+                            // Add a data source containing one point feature.
+                            map.addSource('move3', { type: 'geojson', data: move3 }); 
+
+                            // Add a layer to use the image to represent the data.
+                            map.addLayer({
+                                'id': 'move3',
+                                'type': 'symbol',
+                                'source': 'move3', // reference the data source
+                                'layout': {
+                                    'icon-image': 'fune3', // reference the image
+                                    'icon-size': howbig,
+                                    'icon-allow-overlap': true,               
+                                    'icon-ignore-placement': true
+                                }
+                            });
+                            let i = 0;
+                            const timer3 = setInterval(() => {
+                                if (i < coordinates3.length) {
+                                    move3.features[0].geometry.coordinates = coordinates3[[i]];
+                                    map.getSource('move3').setData(move3);
+                                    i++;
+                                    } 
+                                    else {
+                                    window.clearInterval(timer3);
+                                    }
+                                }, speed);
+                        }          
+                        );
+                    });
+
+                 // The fourth one
+
+                 document.getElementById('hhhfourth').addEventListener('click',() => {
+                    map.removeImage('fune4')
+                    map.removeLayer('move4')
+                    map.removeSource('move4')
+                    map.removeSource('trace4')
                 })
 
                 document.getElementById('hhhfourth').addEventListener('click', async () => {
-                map.removeLayer('move')
-                map.removeSource('move')
 
-                const response = await fetch(         
-                'https://raw.githubusercontent.com/sherlkk/DVG/main/zhfour.geojson'             
-                );
-                        
-                const data = await response.json();                           
-                const coordinates = data.features[0].geometry.coordinates[0];                            
-                data.features[0].geometry.coordinates[0] = [coordinates[[0]]];    
-
-                // add it to the map               
-                map.addSource('trace', { type: 'geojson', data: data }); 
-                map.loadImage(
-                    'https://raw.githubusercontent.com/sherlkk/DVG/main/sfunee.png',
-                    (error, image) => {
-                        if (error) throw error;
-
-                        // Add the image to the map style.
-                        map.addImage('fune', image);
-                        const move = {
-                            'type': 'FeatureCollection',
-                            'features': [
-                                {
-                                    'type': 'Feature',
-                                    'properties': {},
-                                    'geometry': {
-                                        'type': 'Point',
-                                        'coordinates': [ 118.800474076522789, 32.059281932576795 ]
-                                    }
-                                }
-                            ]
-                        };
-
-                        // Add a data source containing one point feature.
-                        map.addSource('move', { type: 'geojson', data: move }); 
-
-                        // Add a layer to use the image to represent the data.
-                        map.addLayer({
-                            'id': 'move',
-                            'type': 'symbol',
-                            'source': 'move', // reference the data source
-                            'layout': {
-                                'icon-image': 'fune', // reference the image
-                                'icon-size': 0.3,
-                                'icon-allow-overlap': true,               
-                                'icon-ignore-placement': true
-                            }
-                        });
-                        let i = 0;
-                        const timer = setInterval(() => {
-                            if (i < coordinates.length) {
-                                move.features[0].geometry.coordinates = coordinates[[i]];
-                                map.getSource('move').setData(move);
-                                i++;
-                                } 
-                                else {
-                                window.clearInterval(timer);
-                                }
-                            }, speed);
-                    }          
+                    const response4 = await fetch(         
+                    'https://raw.githubusercontent.com/sherlkk/DVG/main/zhfour.geojson'             
                     );
-                });
+                            
+                    const data4 = await response4.json();            
+                    // save full coordinate list for later                
+                    const coordinates4 = data4.features[0].geometry.coordinates[0];               
+                    // start by showing just the first coordinate               
+                    data4.features[0].geometry.coordinates[0] = [coordinates4[[0]]];    
+                    
+                    // add it to the map               
+                    map.addSource('trace4', { type: 'geojson', data: data4 }); 
+                    map.loadImage(
+                        'https://raw.githubusercontent.com/sherlkk/DVG/main/flag/44.png',
+                        (error, image4) => {
+                            if (error) throw error;
 
-                // The fifth and sixth one
-                document.getElementById('hhhfifth').addEventListener('click',() => {
-                map.removeLayer('move')
-                map.removeSource('trace')
+                            // Add the image to the map style.
+                            map.addImage('fune4', image4);
+                            const move4 = {
+                                'type': 'FeatureCollection',
+                                'features': [
+                                    {
+                                        'type': 'Feature',
+                                        'properties': {},
+                                        'geometry': {
+                                            'type': 'Point',
+                                            'coordinates': [ 118.800474076522789, 32.059281932576795 ]
+                                        }
+                                    }
+                                ]
+                            };
+
+                            // Add a data source containing one point feature.
+                            map.addSource('move4', { type: 'geojson', data: move4 }); 
+
+                            // Add a layer to use the image to represent the data.
+                            map.addLayer({
+                                'id': 'move4',
+                                'type': 'symbol',
+                                'source': 'move4', // reference the data source
+                                'layout': {
+                                    'icon-image': 'fune4', // reference the image
+                                    'icon-size': howbig,
+                                    'icon-allow-overlap': true,               
+                                    'icon-ignore-placement': true
+                                }
+                            });
+                            let i = 0;
+                            const timer4 = setInterval(() => {
+                                if (i < coordinates4.length) {
+                                    move4.features[0].geometry.coordinates = coordinates4[[i]];
+                                    map.getSource('move4').setData(move4);
+                                    i++;
+                                    } 
+                                    else {
+                                    window.clearInterval(timer4);
+                                    }
+                                }, speed);
+                        }          
+                        );
+                    });
+
+
+                 // The fifth one
+
+                 document.getElementById('hhhfifth').addEventListener('click',() => {
+                    map.removeImage('fune5')
+                    map.removeLayer('move5')
+                    map.removeSource('move5')
+                    map.removeSource('trace5')
                 })
 
                 document.getElementById('hhhfifth').addEventListener('click', async () => {
-                map.removeLayer('move')
-                map.removeSource('move')
 
-                const response = await fetch(         
-                'https://raw.githubusercontent.com/sherlkk/DVG/main/zhfive.geojson'             
-                );
-                        
-                const data = await response.json();                           
-                const coordinates = data.features[0].geometry.coordinates[0];                           
-                data.features[0].geometry.coordinates[0] = [coordinates[[0]]];    
-
-                // add it to the map               
-                map.addSource('trace', { type: 'geojson', data: data }); 
-                map.loadImage(
-                    'https://raw.githubusercontent.com/sherlkk/DVG/main/sfunee.png',
-                    (error, image) => {
-                        if (error) throw error;
-
-                        // Add the image to the map style.
-                        map.addImage('fune', image);
-                        const move = {
-                            'type': 'FeatureCollection',
-                            'features': [
-                                {
-                                    'type': 'Feature',
-                                    'properties': {},
-                                    'geometry': {
-                                        'type': 'Point',
-                                        'coordinates': [ 118.800474076522789, 32.059281932576795 ]
-                                    }
-                                }
-                            ]
-                        };
-
-                        // Add a data source containing one point feature.
-                        map.addSource('move', { type: 'geojson', data: move }); 
-
-                        // Add a layer to use the image to represent the data.
-                        map.addLayer({
-                            'id': 'move',
-                            'type': 'symbol',
-                            'source': 'move', // reference the data source
-                            'layout': {
-                                'icon-image': 'fune', // reference the image
-                                'icon-size': 0.3,
-                                'icon-allow-overlap': true,               
-                                'icon-ignore-placement': true
-                            }
-                        });
-                        let i = 0;
-                        const timer = setInterval(() => {
-                            if (i < coordinates.length) {
-                                move.features[0].geometry.coordinates = coordinates[[i]];
-                                map.getSource('move').setData(move);
-                                i++;
-                                } 
-                                else {
-                                window.clearInterval(timer);
-                                }
-                            }, speed);
-                    }          
+                    const response5 = await fetch(         
+                    'https://raw.githubusercontent.com/sherlkk/DVG/main/zhfive.geojson'             
                     );
-                });
+                            
+                    const data5 = await response5.json();            
+                    // save full coordinate list for later                
+                    const coordinates5 = data5.features[0].geometry.coordinates[0];               
+                    // start by showing just the first coordinate               
+                    data5.features[0].geometry.coordinates[0] = [coordinates5[[0]]];    
+                    
+                    // add it to the map               
+                    map.addSource('trace5', { type: 'geojson', data: data5 }); 
+                    map.loadImage(
+                        'https://raw.githubusercontent.com/sherlkk/DVG/main/flag/55.png',
+                        (error, image5) => {
+                            if (error) throw error;
+
+                            // Add the image to the map style.
+                            map.addImage('fune5', image5);
+                            const move5 = {
+                                'type': 'FeatureCollection',
+                                'features': [
+                                    {
+                                        'type': 'Feature',
+                                        'properties': {},
+                                        'geometry': {
+                                            'type': 'Point',
+                                            'coordinates': [ 118.800474076522789, 32.059281932576795 ]
+                                        }
+                                    }
+                                ]
+                            };
+
+                            // Add a data source containing one point feature.
+                            map.addSource('move5', { type: 'geojson', data: move5 }); 
+
+                            // Add a layer to use the image to represent the data.
+                            map.addLayer({
+                                'id': 'move5',
+                                'type': 'symbol',
+                                'source': 'move5', // reference the data source
+                                'layout': {
+                                    'icon-image': 'fune5', // reference the image
+                                    'icon-size': howbig,
+                                    'icon-allow-overlap': true,               
+                                    'icon-ignore-placement': true
+                                }
+                            });
+                            let i = 0;
+                            const timer5 = setInterval(() => {
+                                if (i < coordinates5.length-0.1) {
+                                    move5.features[0].geometry.coordinates = coordinates5[[i]];
+                                    map.getSource('move5').setData(move5);
+                                    i++;
+                                    } 
+                                    else {
+                                    window.clearInterval(timer5);
+                                    }
+                                }, speed);
+                        }          
+                        );
+                    });
+
+                    // The sixth one
+
+                    document.getElementById('hhhsixth').addEventListener('click',() => {
+                        map.removeImage('fune6')
+                        map.removeLayer('move6')
+                        map.removeSource('move6')
+                        map.removeSource('trace6')
+                    })
+
+                    document.getElementById('hhhsixth').addEventListener('click', async () => {
+
+                        const response6 = await fetch(         
+                        'https://raw.githubusercontent.com/sherlkk/DVG/main/zhfive.geojson'             
+                        );
+                                
+                        const data6 = await response6.json();            
+                        // save full coordinate list for later                
+                        const coordinates6 = data6.features[0].geometry.coordinates[0];               
+                        // start by showing just the first coordinate               
+                        data6.features[0].geometry.coordinates[0] = [coordinates6[[0]]];    
+                        
+                        // add it to the map               
+                        map.addSource('trace6', { type: 'geojson', data: data6 }); 
+                        map.loadImage(
+                            'https://raw.githubusercontent.com/sherlkk/DVG/main/flag/66.png',
+                            (error, image6) => {
+                                if (error) throw error;
+
+                                // Add the image to the map style.
+                                map.addImage('fune6', image6);
+                                const move6 = {
+                                    'type': 'FeatureCollection',
+                                    'features': [
+                                        {
+                                            'type': 'Feature',
+                                            'properties': {},
+                                            'geometry': {
+                                                'type': 'Point',
+                                                'coordinates': [ 118.800474076522789, 32.059281932576795 ]
+                                            }
+                                        }
+                                    ]
+                                };
+
+                                // Add a data source containing one point feature.
+                                map.addSource('move6', { type: 'geojson', data: move6 }); 
+
+                                // Add a layer to use the image to represent the data.
+                                map.addLayer({
+                                    'id': 'move6',
+                                    'type': 'symbol',
+                                    'source': 'move6', // reference the data source
+                                    'layout': {
+                                        'icon-image': 'fune6', // reference the image
+                                        'icon-size': howbig,
+                                        'icon-allow-overlap': true,               
+                                        'icon-ignore-placement': true
+                                    }
+                                });
+                                let i = 0;
+                                const timer6 = setInterval(() => {
+                                    if (i < coordinates6.length-0.5) {
+                                        move6.features[0].geometry.coordinates = coordinates6[[i]];
+                                        map.getSource('move6').setData(move6);
+                                        i++;
+                                        } 
+                                        else {
+                                        window.clearInterval(timer6);
+                                        }
+                                    }, speed);
+                            }          
+                            );
+                        });
 
                 // The last one
 
-                document.getElementById('full').addEventListener('click',() => {
-                map.removeLayer('move')
-                map.removeSource('trace')
+                 document.getElementById('full').addEventListener('click',() => {
+                    map.removeImage('fune7')
+                    map.removeLayer('move7')
+                    map.removeSource('move7')
+                    map.removeSource('trace7')
                 })
 
                 document.getElementById('full').addEventListener('click', async () => {
-                map.removeLayer('move')
-                map.removeSource('move')
 
-                const response = await fetch(         
-                'https://raw.githubusercontent.com/sherlkk/DVG/main/zhfull.geojson'             
-                );
-                        
-                const data = await response.json();                       
-                const coordinates = data.features[0].geometry.coordinates[0];                            
-                data.features[0].geometry.coordinates[0] = [coordinates[[0]]];    
-
-                // add it to the map               
-                map.addSource('trace', { type: 'geojson', data: data }); 
-                map.loadImage(
-                    'https://raw.githubusercontent.com/sherlkk/DVG/main/sfunee.png',
-                    (error, image) => {
-                        if (error) throw error;
-
-                        // Add the image to the map style.
-                        map.addImage('fune', image);
-                        const move = {
-                            'type': 'FeatureCollection',
-                            'features': [
-                                {
-                                    'type': 'Feature',
-                                    'properties': {},
-                                    'geometry': {
-                                        'type': 'Point',
-                                        'coordinates': [ 118.800474076522789, 32.059281932576795 ]
-                                    }
-                                }
-                            ]
-                        };
-
-                        // Add a data source containing one point feature.
-                        map.addSource('move', { type: 'geojson', data: move }); 
-
-                        // Add a layer to use the image to represent the data.
-                        map.addLayer({
-                            'id': 'move',
-                            'type': 'symbol',
-                            'source': 'move', // reference the data source
-                            'layout': {
-                                'icon-image': 'fune', // reference the image
-                                'icon-size': 0.3,
-                                'icon-allow-overlap': true,               
-                                'icon-ignore-placement': true
-                            }
-                        });
-                        let i = 0;
-                        const timer = setInterval(() => {
-                            if (i < coordinates.length) {
-                                move.features[0].geometry.coordinates = coordinates[[i]];
-                                map.getSource('move').setData(move);
-                                i++;
-                                } 
-                                else {
-                                window.clearInterval(timer);
-                                }
-                            }, speed);
-                    }          
+                    const response7 = await fetch(         
+                    'https://raw.githubusercontent.com/sherlkk/DVG/main/zhfull.geojson'             
                     );
-                });
+                            
+                    const data7 = await response7.json();            
+                    // save full coordinate list for later                
+                    const coordinates7 = data7.features[0].geometry.coordinates[0];               
+                    // start by showing just the first coordinate               
+                    data7.features[0].geometry.coordinates[0] = [coordinates7[[0]]];    
+                    
+                    // add it to the map               
+                    map.addSource('trace7', { type: 'geojson', data: data7 }); 
+                    map.loadImage(
+                        'https://raw.githubusercontent.com/sherlkk/DVG/main/flag/77.png',
+                        (error, image7) => {
+                            if (error) throw error;
+
+                            // Add the image to the map style.
+                            map.addImage('fune7', image7);
+                            const move7 = {
+                                'type': 'FeatureCollection',
+                                'features': [
+                                    {
+                                        'type': 'Feature',
+                                        'properties': {},
+                                        'geometry': {
+                                            'type': 'Point',
+                                            'coordinates': [ 118.800474076522789, 32.059281932576795 ]
+                                        }
+                                    }
+                                ]
+                            };
+
+                            // Add a data source containing one point feature.
+                            map.addSource('move7', { type: 'geojson', data: move7 }); 
+
+                            // Add a layer to use the image to represent the data.
+                            map.addLayer({
+                                'id': 'move7',
+                                'type': 'symbol',
+                                'source': 'move7', // reference the data source
+                                'layout': {
+                                    'icon-image': 'fune7', // reference the image
+                                    'icon-size': howbig,
+                                    'icon-allow-overlap': true,               
+                                    'icon-ignore-placement': true
+                                }
+                            });
+                            let i = 0;
+                            const timer7 = setInterval(() => {
+                                if (i < coordinates7.length) {
+                                    move7.features[0].geometry.coordinates = coordinates7[[i]];
+                                    map.getSource('move7').setData(move7);
+                                    i++;
+                                    } 
+                                    else {
+                                    window.clearInterval(timer7);
+                                    }
+                                }, speed);
+                        }          
+                        );
+                    });
+
+                    
+
+
+
             });
 
             document.getElementById('interactive').addEventListener('click', function() {
