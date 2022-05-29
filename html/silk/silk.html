@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>The silllllk road</title>
+        <title>The silk road</title>
         <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
         <link href="https://api.mapbox.com/mapbox-gl-js/v2.8.0/mapbox-gl.css" rel="stylesheet">
         <script src="https://api.mapbox.com/mapbox-gl-js/v2.8.0/mapbox-gl.js"></script>
@@ -71,7 +71,7 @@
                 pitch: 66
             });
 
-            const speed = 100
+            const speed = 88
 
             function toggleSidebar(id) {
                 const elem = document.getElementById(id);
@@ -319,7 +319,7 @@
                             });
 
         
-            beforeMap.once('click', async () => {
+            beforeMap.on('click', async () => {
                 
                 beforeMap.removeLayer('go')
                 beforeMap.removeSource('go')
