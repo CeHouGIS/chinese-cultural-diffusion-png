@@ -1,14 +1,22 @@
 .at-section__title {
   /* margin: 0 0 70px; */
   padding-top: 50px;
-  padding-bottom: 60px;
+  padding-bottom: 30px;
 
   color: rgba(255, 255, 255, 0.7);
-  font-family: "Manrope";
-  font-size: 33px;
+  /* font-family: "Manrope"; */
+  font-size: 40px;
   /* font-weight: 300;
   line-height: 2.625rem; */
   text-align: center;
+}
+
+.logo {
+  margin: 0 auto;
+  text-align: center;
+  align-items: center;
+  height: 30vh;
+  /* opacity: 0.5; */
 }
 
 .at-grid {
