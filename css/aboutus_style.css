@@ -1,6 +1,6 @@
 .at-section__title {
   /* margin: 0 0 70px; */
-  padding-top: 50px;
+  padding-top: 36px;
   padding-bottom: 30px;
 
   color: rgba(255, 255, 255, 0.7);
@@ -15,7 +15,7 @@
   margin: 0 auto;
   text-align: center;
   align-items: center;
-  height: 30vh;
+  height: 26vh;
   /* opacity: 0.5; */
 }
 

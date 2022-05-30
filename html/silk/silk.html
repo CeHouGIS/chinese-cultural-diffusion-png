@@ -56,9 +56,9 @@
                 container: 'before',
                 style: 'mapbox://styles/sirikat9012/cl34mibqf000314qvusl3ayet',
                 interactive: true,
-                zoom: 11.9,
-                center: [108.926,34.22],
-                pitch: 66,
+                zoom: 12,
+                center: [108.926,34.233],
+                pitch: 60,
             });
 
 
@@ -71,7 +71,7 @@
                 pitch: 66
             });
 
-            const speed = 88
+            const speed = 100
 
             function toggleSidebar(id) {
                 const elem = document.getElementById(id);
@@ -156,8 +156,8 @@
                     })
                     document.getElementById("start").addEventListener("click", function () {
                         beforeMap.flyTo({
-                            center: [106.926,34.225],
-                            zoom: 6
+                            center: [108.926,34.233],
+                            zoom: 12
                         });
                     })
 
@@ -319,7 +319,7 @@
                             });
 
         
-            beforeMap.on('click', async () => {
+            beforeMap.once('click', async () => {
                 
                 beforeMap.removeLayer('go')
                 beforeMap.removeSource('go')
